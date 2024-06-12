@@ -1,7 +1,6 @@
 #!/usr/bin/node
-/* prints all characters of a Star Wars movie.
-    - the first argument is the Movie ID.
-    - displays one character name by line.
+/* 
+    prints all characters of a Star Wars movie.
 */
 const request = require('request');
 const url = 'https://swapi-api.hbtn.io/api/films/' + process.argv[2];
