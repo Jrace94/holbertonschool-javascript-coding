@@ -4,7 +4,7 @@
 */
 const request = require('request');
 
-function getDataFrom(url) {
+function getDataFrom (url) {
   return new Promise(function (resolve, reject) {
     request(url, function (err, _res, body) {
       if (err) {
@@ -16,11 +16,11 @@ function getDataFrom(url) {
   });
 }
 
-function errHandler(err) {
+function errHandler (err) {
   console.log(err);
 }
 
-function printMovieCharacters(movieId) {
+function printMovieCharacters (movieId) {
   const movieUri = `https://swapi-api.hbtn.io/api/films/${movieId}`;
 
   getDataFrom(movieUri)
