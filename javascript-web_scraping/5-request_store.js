@@ -7,7 +7,7 @@ const url = process.argv[2];
 const fileName = process.argv[3];
 const fs = require('fs');
 
-function writeFile(nameFile, data) {
+function writeFile (nameFile, data) {
   fs.writeFile(nameFile, data, 'utf8', (err) => {
     if (err) {
       return console.error(err);
