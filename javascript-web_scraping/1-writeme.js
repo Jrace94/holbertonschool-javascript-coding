@@ -1,16 +1,13 @@
-#!/usr/bin/node
+#!/usr/bin / node
 /*
      writes a string to a file
 */
 const fs = require('fs');
+const nameFile = process.argv[2];
+const str = process.argv[3];
 
-const filePath = process.argv[2];
-const content = process.argv[3];
-
-fs.writeFile(filePath, content, 'utf-8', (err) => {
+fs.writeFile(nameFile, str, 'utf8', (err) => {
   if (err) {
-    console.error(err);
-  } else {
-    console.log('Content has been written to the file successfully.');
+    return console.error(err);
   }
 });
