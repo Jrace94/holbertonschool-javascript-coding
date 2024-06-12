@@ -1,6 +1,6 @@
-#!/usr/bin / node
+#!/usr/bin/node
 /*
-     writes a string to a file
+    writes a string to a file
 */
 const fs = require('fs');
 const nameFile = process.argv[2];
