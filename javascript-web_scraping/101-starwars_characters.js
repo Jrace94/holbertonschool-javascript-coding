@@ -1,46 +1,29 @@
 #!/usr/bin/node
-/*
-    Write a script that prints all
-    characters of a Star Wars movie
+/* prints all characters of a Star Wars movie.
+    - the first argument is the Movie ID.
+    - displays one character name by line.
 */
 const request = require('request');
-const movieId = process.argv[2];
-const url = `https://swapi.dev/api/films/${movieId}/`;
-
-request(url, (error, response, body) => {
-  if (error) {
-    console.error('Error fetching data:', error);
-    return;
-  }
-
-  if (response.statusCode !== 200) {
-    console.error('Failed to fetch data. Status code:', response.statusCode);
-    return;
-  }
-
-  const movie = JSON.parse(body);
-  const charactersUrls = movie.characters;
-
-  // Fetch details for each character in the order provided by the API
-  charactersUrls.forEach((characterUrl, index) => {
-    request(characterUrl, (charError, charResponse, charBody) => {
-      if (charError) {
-        console.error('Error fetching character data:', charError);
-        return;
-      }
-
-      if (charResponse.statusCode !== 200) {
-        console.error('Failed to fetch character data. Status code:', charResponse.statusCode);
-        return;
-      }
-
-      const character = JSON.parse(charBody);
-      console.log(character.name);
-
-      // If this is the last character, print an empty line
-      if (index === charactersUrls.length - 1) {
-        console.log('');
-      }
+const url = 'https://swapi-api.hbtn.io/api/films/' + process.argv[2];
+request(url, function (error, response, body) {
+  if (error) console.log(error);
+  else {
+    const characters = JSON.parse(body).characters;
+    characters_dict = {};
+    characters.forEach((character) => {
+      request(character, function (error, response, body) {
+        if (error) console.log(error);
+        else {
+          let id = JSON.parse(body).url;
+          id = id.replace('https://swapi-api.hbtn.io/api/people/', '');
+          id = id.replace('/', '');
+          const name = JSON.parse(body).name;
+          characters_dict[id] = (name);
+        }
+      });
     });
-  });
+    for (let id in characters_dict) {
+      console.log(characters_dict[id]);
+    }
+  }
 });
